@@ -1,21 +1,25 @@
 <template>
-  <v-flex xs12>
-    <v-text-field label="Введите сообщение" outline v-model="text" @keydown.enter="send"/>
-  </v-flex>
+  <div>
+    <input  v-model="text" @keydown.enter="send"/>
+  </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data: () => ({
     text: ""
   }),
+  computed: mapState('room',["user"]),
   methods: {
+
+    
     send() {
       this.$socket.emit(
         "createMessage",
         {
           text: this.text,
-          id: this.$store.state.user.id
+          id: this.user.id
         },
         data => {
           if (typeof data === "string") {

@@ -14,12 +14,20 @@ io.on('connection', socket => {
     socket.join(data.room)
 
     users.remove(socket.id)
-    users.add({
-      id: socket.id,
-      name: data.name,
-      room: data.room
+    if(users.getByRoom(data.room[0]) === true){
+        users.add({
+        id: socket.id,
+        name: data.name,
+        room: data.room[0]
     })
-
+    }else {
+        users.add({
+        id: socket.id,
+        name: data.name,
+        room: data.room[1]
+    })
+    }
+ 
     cb({ userId: socket.id })
     io.to(data.room).emit('updateUsers', users.getByRoom(data.room))
     socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}.`))

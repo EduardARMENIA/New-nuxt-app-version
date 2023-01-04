@@ -4,6 +4,7 @@ class Users {
   }
 
   add(user) {
+    console.log(user)
     this.users.push(user)
   }
 

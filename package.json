@@ -18,11 +18,15 @@
     "socket.io": "^2.2.0",
     "vue-socket.io": "^3.0.7",
     "vuetify": "^1.5.5",
-    "vuetify-loader": "^1.2.1"
+    "vuetify-loader": "^1.2.1",
+      "@nuxtjs/axios": "^5.13.6",
+     "cookie-universal-nuxt": "^2.2.2",
+     "bootstrap": "^4.3.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "stylus-loader": "^3.0.2",
+    "vue-cropperjs": "^4.0.0"
   }
 }

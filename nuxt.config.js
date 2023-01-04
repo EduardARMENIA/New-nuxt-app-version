@@ -1,5 +1,5 @@
 const pkg = require('./package')
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+
 
 module.exports = {
   mode: 'universal',
@@ -27,34 +27,59 @@ module.exports = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+ 
 
   /*
    ** Global CSS
    */
-  css: ['~/assets/style/app.styl'],
+ css: [
+    '@/node_modules/bootstrap/dist/css/bootstrap.min.css'
+  ],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify', { src: '@/plugins/socket', ssr: false }],
+  plugins: [ { src: '@/plugins/socket', ssr: false },   { src: '~/plugins/vue-cropper', ssr: false }],
+  
 
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa'],
+  modules: ['@nuxtjs/pwa',  '@nuxtjs/axios',
+    ['cookie-universal-nuxt', { alias: 'cookiz' }],
+     ],
+  
+   axios: {
+    baseURL: 'http://localhost:8000' // Used as fallback if no runtime config is provided
+  },
+
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.BROWSER_BASE_URL
+    }
+  },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BASE_URL
+    }
+  },
+  
+
+
+  proxy: {
+    '/api/': { target: 'http://localhost:8000/', pathRewrite: { '^/api/': '' }, changeOrigin: true }
+  },
 
   /*
    ** Build configuration
    */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl']
-      }
-    },
+     vendor: [
+      'vue-cropper'
+    ], 
+  
+   
     /*
      ** You can extend webpack config here
      */

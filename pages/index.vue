@@ -1,83 +1,170 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8>
-      <v-card min-width="400">
-        <v-snackbar v-model="snackbar" :timeout="6000" top>
-          {{ message }}
-          <v-btn color="pink" flat @click="snackbar = false">Закрыть</v-btn>
-        </v-snackbar>
-
-        <v-card-title>
-          <h1>Nuxt чат</h1>
-        </v-card-title>
-        <v-card-text>
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field v-model="name" :counter="16" :rules="nameRules" label="Ваше имя" required></v-text-field>
-
-            <v-text-field v-model="room" :rules="roomRules" label="Введите комнату" required></v-text-field>
-
-            <v-btn :disabled="!valid" color="primary" @click="submit">Войти</v-btn>
-          </v-form>
-        </v-card-text>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <div>
+    <div class="block">
+      <div>
+        <h1>Instagram</h1>
+        <p class="one">
+          У вас ещё нет аккаунта?
+          <nuxt-link active-class="active" to="/register">
+            Зарегистрироваться
+          </nuxt-link>
+        </p>
+        <button>Open your Facebook</button>
+        <div class="inputs">
+          <input v-model="email" type="email" placeholder="Email">
+          <input v-model="password" type="password" placeholder="Password">
+        </div>
+        <p>Люди, которые пользуются нашим сервисом,<br> могли загрузить вашу контактную информацию <br>в Instagram. Подробнее</p>
+        <p>Регистрируясь, вы принимаете наши Условия,<br> Политику конфиденциальности и Политику в <br>отношении файлов cookie.</p>
+        <button class="reg" @click="submit">
+          Login
+        </button>
+      </div>
+    </div>
+    <footer>
+      <ul>
+        <li>Meta</li>
+        <li>Информация</li>
+        <li>Блог</li>
+        <li>Вакансии</li>
+        <li>API</li>
+        <li>Конфиденциальность</li>
+        <li>Условия</li>
+        <li>Популярные аккаунты</li>
+        <li>Хэштеги</li>
+        <li>Места</li>
+        <li>Instagram Lite</li>
+      </ul>
+    </footer>
+  </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 export default {
-  layout: "empty",
-  head: {
-    title: "Добро пожаловать в Nuxt чат"
-  },
-  sockets: {
-    connect: function() {
-      console.log("socket connected");
+  data () {
+    return {
+      email: '',
+      password: ''
     }
-  },
-  data: () => ({
-    valid: true,
-    snackbar: false,
-    message: "",
-    name: "",
-    nameRules: [
-      v => !!v || "Введите имя",
-      v => (v && v.length <= 16) || "Имя не должно превышать 16 символов"
-    ],
-    room: "",
-    roomRules: [v => !!v || "Введите комнату"]
-  }),
-  mounted() {
-    const { message } = this.$route.query;
-    if (message === "noUser") {
-      this.message = "Введите данные";
-    } else if (message === "leftChat") {
-      this.message = "Вы вышли из чата";
-    }
-
-    this.snackbar = !!this.message;
   },
   methods: {
-    ...mapMutations(["setUser"]),
-    submit() {
-      if (this.$refs.form.validate()) {
-        const user = {
-          name: this.name,
-          room: this.room
-        };
-
-        this.$socket.emit("userJoined", user, data => {
-          if (typeof data === "string") {
-            console.error(data);
-          } else {
-            user.id = data.userId;
-            this.setUser(user);
-            this.$router.push("/chat");
-          }
-        });
-      }
+    submit () {
+      this.$store.dispatch('authetification/auth/login', { email: this.email, password: this.password })
     }
   }
-};
+}
 </script>
+
+<style scoped>
+    @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+    .block{
+        height: 78vh;
+        width: 40%;
+        border: 1px solid rgba(128, 128, 128, 0.363);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        margin: 20px auto;
+        }
+        .block h1{
+            font-family: 'Lobster', cursive;
+            font-weight: 400;
+            font-size: 30px;
+            height: 60px;
+        }
+        .one{
+            color: grey;
+            font-size: 15px !important;
+        }
+        .block p{
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 13px;
+            text-align: center;
+            line-height: 30px;
+            color: rgb(63, 61, 61);
+        }
+        .block button{
+            width: 250px;
+            height: 30px;
+            outline: none;
+            border: none;
+            background-color: rgb(40, 166, 224);
+            color: white;
+           font-family: sans-serif;
+           border-radius: 5px;
+           margin-top: 30px;
+        }
+        .block div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .inputs{
+            display: flex;
+            flex-direction: column;
+        }
+        .inputs{
+            margin-top: 10px;
+        }
+        .inputs input{
+            margin-top: 20px;
+            width: 380px;
+            height: 40px;
+            outline: none;
+          border: 1px solid rgba(128, 128, 128, 0.363);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding-left: 10px;
+            border-radius: 5px;
+            background-color: rgba(211, 201, 201, 0.192);
+        }
+        ::-webkit-input-placeholder{
+            color: grey;
+        }
+        .reg{
+            width: 150px;
+            height: 30px;
+            outline: none;
+            border: none;
+            background-color: rgb(40, 166, 224);
+            color: white;
+           font-family: sans-serif;
+           border-radius: 5px;
+        }
+    footer{
+      width: 100%;
+      display: flex;
+    }
+    footer ul{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      list-style: none;
+    }
+    footer ul li{
+      text-decoration: none;
+      font-family: sans-serif;
+      color: grey !important;
+      font-size: 13px;
+    }
+        @media (max-width:900px){
+            img{
+                display: none;
+            }
+            main{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+            .block{
+                width: 85%;
+            }
+            footer{
+              display: flex;
+              flex-direction: column;
+            }
+        }
+    </style>

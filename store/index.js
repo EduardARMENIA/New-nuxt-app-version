@@ -1,22 +1,26 @@
 export const state = () => ({
-  user: {},
-  messages: [],
-  users: []
+  token: null
+
 })
 
 export const mutations = {
-  setUser(state, user) {
-    state.user = user
+  setToken (state, token) {
+    state.token = token
   },
-  clearData(state) {
-    state.user = {}
-    state.messages = []
-    state.users = []
-  },
-  SOCKET_newMessage(state, message) {
-    state.messages.push(message)
-  },
-  SOCKET_updateUsers(state, users) {
-    state.users = users
+  clearToken (state) {
+    state.token = null
   }
+}
+
+export const actions = {
+  login ({ commit }) {
+    commit('setToken', 'truetoken')
+  },
+  logout ({ commit }) {
+    commit('clearToken')
+  }
+}
+
+export const getters = {
+  hasToken: s => !!s.token
 }
