@@ -9,10 +9,9 @@
   </v-layout>
 </template>
 
+
 <script>
 import { mapMutations } from "vuex";
-import { mapGetters } from 'vuex'
-import { mapState } from "vuex";
 export default {
   layout: "empty",
   head: {
@@ -34,7 +33,7 @@ export default {
     ],
     room: "",
     roomRules: [v => !!v || "Введите комнату"]
-  }), 
+  }),
   mounted() {
     const { message } = this.$route.query;
     if (message === "noUser") {
@@ -46,19 +45,12 @@ export default {
     this.snackbar = !!this.message;
   },
   methods: {
-    ...mapMutations("room",["setUser"]),
-     ...mapGetters({
-      users: 'profile/profile/getUsers'
-    }),
-
-    async submit() {
-        await this.$store.dispatch('profile/profile/Profile')
-        const name = this.$store.getters['profile/profile/getUsers']
+    ...mapMutations('room',["setUser"]),
+    submit() {
         const user = {
-          name: name[0].name,
-          room: 1
+          name: 1,
+          room: 'room'
         };
-        
 
         this.$socket.emit("userJoined", user, data => {
           if (typeof data === "string") {
@@ -73,3 +65,4 @@ export default {
   }
 };
 </script>
+

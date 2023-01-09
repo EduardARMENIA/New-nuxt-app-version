@@ -4,7 +4,6 @@ class Users {
   }
 
   add(user) {
-    console.log(user)
     this.users.push(user)
   }
 
@@ -12,14 +11,18 @@ class Users {
     return this.users.find(user => user.id === id)
   }
 
-  remove(id) {
-    const user = this.get(id)
-
+  remove(data) {
+    const user = this.users
     if (user) {
-      this.users = this.users.filter(user => user.id !== id)
+      this.users = this.users.filter(user => user.id !== data.id)
+      this.users = this.users.filter(user => user.name !== data.name)
     }
-
     return user
+  }
+
+  removeALL(id) {
+
+    return  this.users = []
   }
 
   getByRoom(room) {

@@ -10,10 +10,11 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import Navbar from '@/components/Navbar'
 export default {
   components: {
     Navbar
-  }
+  },
 }
 </script>

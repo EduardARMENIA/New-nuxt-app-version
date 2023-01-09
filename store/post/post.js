@@ -13,7 +13,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async getPosts ({ commit }) {
+  async getPosts ({ commit, dispatch }) {
     const Post = await this.$axios.$get('/api/post')
     for (let i = 0; i < Post.length; i++) {
       const response = await this.$axios.$get(`/api/${Post[i].img[0]}/post_image`, { responseType: 'blob' })
@@ -22,9 +22,10 @@ export const actions = {
       const likesCount = await this.$axios.$get(`/api/${Post[i]._id}/like`)
       Post[i].likes[0] = likesCount
     }
+    commit('clearPost')
     commit('setPost', Post)
   },
-  async addPosts ({}, data) {
+  async addPosts ({commit,dispatch}, data) {
     const cookieValue = this.$cookiz.get('jwt')
     const formData = new FormData()
     formData.append('image', data.file)
@@ -40,7 +41,7 @@ export const actions = {
       })
      this.$router.push('/home') 
   },
-  async addComment ({}, data) {
+  async addComment ({dispatch, commit}, data) {
      const cookieValue = this.$cookiz.get('jwt')
      const headers = {
       'Content-Type': 'application/json',
@@ -49,7 +50,9 @@ export const actions = {
     await this.$axios.$post(`/api/${data.id}/comment`, { content: data.content }, {
       headers
     })
-    window.location.reload()
+    await commit('clearPost')
+    dispatch("getPosts");
+
   },
 
 
@@ -66,38 +69,7 @@ export const actions = {
       dispatch("getPosts");
   },
   
-
-  async delatePosts ({}, data) {
-    const cookieValue = this.$cookiz.get('jwt')
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `${cookieValue}`
-    }
-    await this.$axios.$post(`/api/${data.id}/post_delate`, {}, {
-      headers
-    })
-  },
-  async changeDescription ({}, data) {
-    const cookieValue = this.$cookiz.get('jwt')
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `${cookieValue}`
-    }
-    await this.$axios.$post(`/api/${data.id}/description_change`, { content: data.content }, {
-      headers
-    })
-  },
-
-  async changeTitle ({}, data) {
-    const cookieValue = this.$cookiz.get('jwt')
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `${cookieValue}`
-    }
-    await this.$axios.$post(`/api/${data.id}/title_change`, { title: data.content }, {
-      headers
-    })
-  },
+ 
 
 
   async searchPosts ({commit, dispatch }, data) {

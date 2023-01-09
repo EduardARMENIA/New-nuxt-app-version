@@ -10,6 +10,7 @@
           <strong>{{name}}</strong>
         </small>
         <p>{{text}}</p>
+
       </div>
     </div>
   </div>

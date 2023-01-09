@@ -69,18 +69,15 @@ export default {
       this.$store.dispatch('profile/profile/ChangePassword', { content })
     },
     delatePost (id) {
-      this.$store.dispatch('post/post/delatePosts', { id })
-       window.location.reload()
+      this.$store.dispatch('profile/profile/delatePosts', { id })
     },
 
     changeDescription (id, content) {
-      this.$store.dispatch('post/post/changeDescription', { id, content })
-      window.location.reload()
+      this.$store.dispatch('profile/profile/changeDescription', { id, content })
     },
 
     changeTitle (id, content) {
-      this.$store.dispatch('post/post/changeTitle', { id, content })
-      window.location.reload()
+      this.$store.dispatch('profile/profile/changeTitle', { id, content })
     }
 
   }

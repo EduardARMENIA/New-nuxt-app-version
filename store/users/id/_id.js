@@ -9,6 +9,9 @@ export const mutations = {
   },
   setPosts (state, post) {
     state.post = post
+  },
+   clearPost (state) {
+    state.post = null
   }
 }
 
@@ -21,12 +24,12 @@ export const actions = {
     for (let i = 0; i < posts.length; i++) {
       const response = await this.$axios.$get(`/api/${posts[i].img[0]}/post_image`, { responseType: 'blob' })
       const imageObjectURL = URL.createObjectURL(response)
-
+     
       posts[i].img = (imageObjectURL)
       const likesCount = await this.$axios.$get(`/api/${posts[i]._id}/like`)
       posts[i].likes[0] = likesCount
     }
-    commit('setPosts', posts)
+    await commit('setPosts', posts)
     for (let i = 0; i < todos.length; i++) {
       if (todos[i].img[0] === undefined) {
         todos[i].img = ('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png')
@@ -35,12 +38,14 @@ export const actions = {
         const imageObjectURL = URL.createObjectURL(response)
         todos[i].img = (imageObjectURL)
       }
-      commit('setUsers', todos)
+      await commit('setUsers', todos)
     }
   },
-  async addComment (data) {
+  async addComment ({ commit, dispatch }, data) {
     await this.$axios.$post(`/api/${data.id}/comment`, { content: data.content })
-    window.location.reload()
+    await commit('clearPost')
+    dispatch("ProfileById");
+    
   }
 }
 

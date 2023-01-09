@@ -15,6 +15,8 @@ export default {
 
     
     send() {
+      const name = this.$store.getters['profile/profile/getUsers']
+      this.$store.dispatch('room/pushMessage', { text: this.text,  name: name[0].name, id: this.user.id, })
       this.$socket.emit(
         "createMessage",
         {

@@ -11,9 +11,9 @@ io.on('connection', socket => {
       return cb('Данные некорректны')
     }
 
+
     socket.join(data.room)
 
-    users.remove(socket.id)
     if(users.getByRoom(data.room[0]) === true){
         users.add({
         id: socket.id,
@@ -40,15 +40,23 @@ io.on('connection', socket => {
     if (!data.text) {
       return cb('Текст не может быть пустым')
     }
-
+    console.log('good idea')
     const user = users.get(data.id)
     if (user) {
-      io.to(user.room).emit('newMessage', m(user.name, data.text, data.id))
+        console.log(user.room)
+        if(users.getByRoom(user.room[0]) === true){
+           io.to(user.room[0]).emit('newMessage', m(user.name, data.text, data.id))
+        }else{
+           io.to(user.room).emit('newMessage', m(user.name, data.text, data.id))
+        }
     }
     cb()
   })
 
   socket.on('userLeft', (id, cb) => {
+    console.log("leave")
+    console.log(id.room)
+    users.remove(socket.id)
     const user = users.remove(id)
     if (user) {
       io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
