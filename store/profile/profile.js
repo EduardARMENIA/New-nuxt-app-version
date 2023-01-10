@@ -41,7 +41,10 @@ export const actions = {
 
          posts[i].img = (imageObjectURL)
          const likesCount = this.$axios.$get(`/api/${posts[i]._id}/like`)
-         posts[i].likes[0] = likesCount     
+         posts[i].likes[0] = likesCount  
+
+         
+
     
     }
     await commit('clearPost')

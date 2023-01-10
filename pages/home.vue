@@ -46,7 +46,8 @@ export default {
 
 
     submitForm (id, content) {
-      this.$store.dispatch('users/id/_id/addComment', { id, content })
+      this.$store.dispatch('post/post/addComment', { id, content })
+      location.reload();
     }
   }
 }

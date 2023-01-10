@@ -110,7 +110,6 @@ body{
 
 .brand-img{
     height: 100%;
-    margin-top: 5px;
 }
 
 .search-box{
@@ -150,6 +149,7 @@ body{
     }
     .brand-img{
        height:70%;
+        height:32px !important;
     }
     .actives{
     margin-left:170px;
@@ -164,6 +164,11 @@ body{
 }
 .nav-items{
     width:45%;
+}
+.brand-img{
+    height:32px !important;
+    margin-top:1px;
+    margin-left:1%;
 }
 }
 @media (max-width:476px){

@@ -121,7 +121,6 @@ export default {
 
 .post-image{
     width: 100%;
-    height: 700px;
     object-fit: cover;
     background-size:cover;
 }
@@ -170,6 +169,7 @@ export default {
     border: none;
     outline: none;
     font-size: 14px;
+    padding-left:20px;
 }
 
 .comment-btn,
@@ -202,10 +202,16 @@ export default {
 .reaction-wrapper .icon.save{
     margin-left: auto;
 }
-@media (max-width:876px){
+@media (max-width:1200px){
     .post{
-     width:100%;
+     width:100% !important;
      margin-left:0%;
+     
+    }
+    .post-image{
+      background-size:cover;
+      object-fit:cover;
+      height:auto;
     }
 }
 </style>

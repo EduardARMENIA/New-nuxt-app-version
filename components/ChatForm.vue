@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input  v-model="text" @keydown.enter="send"/>
+    <input class="inp"  v-model="text" @keydown.enter="send"/>
   </div>
 </template>
 
@@ -38,3 +38,11 @@ export default {
 };
 </script>
 
+<style scoped>
+.inp{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:auto;
+}
+</style>

@@ -7,10 +7,10 @@
     <p>{{ email }}</p>
 
          <input type="file" accept="image/*" @change="onChange" class='hiddenFileInput'/>
-        <input id="text" type="password"  v-model="content" placeholder="Change Password" name="content" />
+        <input id="text" type="password"  v-model="content" placeholder="Change Password" name="content" style="margin-top:20px;"/>
         <button @click="$emit('password', content)" id = 'send'>Change Password</button>
   </div>
-  <h4>Your Posts</h4>
+  <h4 style="margin-left:20px;">Your Posts</h4>
 </div>
 </template>        
 
@@ -66,6 +66,12 @@ img {
   box-shadow:0px 0px 2px 2px grey;
   border:none !important;
   outline:none;
+  border-radius:10px;
+  background-color:#F6AF46;
+}
+#text{
+  outline:none;
+  padding-left:10px;
 }
 @media (max-width:700px){
   .card{

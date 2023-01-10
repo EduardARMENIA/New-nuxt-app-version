@@ -1,8 +1,5 @@
 <template>
   <div class="c-wrap">
-    <button @click="exit">
-        <h6>exit room</h6>
-      </button>
     <div class="c-chat" ref="block">
       <Message
         v-for="m in messages"
@@ -16,6 +13,9 @@
     <div class="c-form">
       <ChatForm/>
     </div>
+    <button class="btn" @click="exit">
+        <h6>exit room</h6>
+      </button>
   </div>
 </template>
 
@@ -80,3 +80,17 @@ export default {
 
 
 
+<style scoped>
+.btn{
+  box-shadow:0px 0px 2px 2px grey;
+  border:none !important;
+  outline:none;
+  border-radius:10px;
+  background-color:#F6AF46;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:auto;
+  margin-top:10px;
+}
+</style>

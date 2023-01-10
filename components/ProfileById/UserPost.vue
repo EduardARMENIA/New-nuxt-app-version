@@ -4,10 +4,6 @@
         <div class="left-col">
             <div class="post">
                 <div class="info">
-                 <button class="btn" @click.prevent="openUser(author_id)">
-                            See Profile
-                 </button> 
-
                  <p class="description" ><span>User </span>{{ author }} </p>
                    
 
@@ -20,7 +16,6 @@
                     </div>
       
 
-                    <p class="likes">{{ likes[0] }} likes</p>
                                   <p class="description"><span>title </span>{{ title }} </p>
                     <p class="description"><span>desription </span>{{ description }} </p>
                 
@@ -61,7 +56,6 @@ export default {
   methods: {
     addLike (id) {
       this.$store.dispatch('post/post/addLike', {id})
-      window.location.reload()
     },
 
     openUser (user) {

@@ -39,7 +39,7 @@ export default {
 </script>
 <style>
 .relative{
-  width:80%;
+  width:100%;
   margin-top:40px;
 }
 #input{
@@ -51,6 +51,11 @@ export default {
 @media (max-width:900px){
   .relative{
   width:100%;
+  }
 }
+@media (min-width:1200px){
+  .relative{
+  width:80% !important;
+  }
 }
 </style>

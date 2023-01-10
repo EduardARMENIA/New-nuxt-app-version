@@ -111,7 +111,7 @@ export default {
   margin-top: 10px;
 }
 .inputs input{
-  margin-top: 20px;
+  margin-top: 10px !important;
   width: 380px;
   height: 40px;
   outline: none;

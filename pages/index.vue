@@ -11,8 +11,8 @@
         </p>
         <button>Open your Facebook</button>
         <div class="inputs">
-          <input v-model="email" type="email" placeholder="Email">
-          <input v-model="password" type="password" placeholder="Password">
+          <input v-model="email" required type="email" placeholder="Email" id="input">
+          <input v-model="password" required type="password" placeholder="Password" id="input">
         </div>
         <p>Люди, которые пользуются нашим сервисом,<br> могли загрузить вашу контактную информацию <br>в Instagram. Подробнее</p>
         <p>Регистрируясь, вы принимаете наши Условия,<br> Политику конфиденциальности и Политику в <br>отношении файлов cookie.</p>
@@ -115,11 +115,14 @@ export default {
             width: 380px;
             height: 40px;
             outline: none;
-          border: 1px solid rgba(128, 128, 128, 0.363);
+            border: 1px solid rgba(128, 128, 128, 0.363);
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             padding-left: 10px;
             border-radius: 5px;
             background-color: rgba(211, 201, 201, 0.192);
+        }
+         #input:invalid:required{
+            border: 1px solid red !important;
         }
         ::-webkit-input-placeholder{
             color: grey;
@@ -162,10 +165,16 @@ export default {
             }
             .block{
                 width: 85%;
+                border:none;
+                 margin-top:120px !important;
+            }
+            .inputs input{
+            width:300px;
             }
             footer{
               display: flex;
               flex-direction: column;
+              display:none;
             }
         }
     </style>

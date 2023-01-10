@@ -41,6 +41,7 @@ export default {
 .wrap {
   display: flex;
   flex-direction: column;
+  margin-top:20px;
 }
 
 .mes {

@@ -5,7 +5,7 @@
   <div class="container">
     <h4><b>{{ name }}</b></h4>
     <p>{{ email }}</p>
-      <button color="primary" @click="submit">Message</button>
+      <button class="btn" @click="submit">Message</button>
   </div>
 </div>
 </template>        
@@ -88,7 +88,13 @@ export default {
   width: 40%;
   margin-left:5%;
 }
-
+.btn{
+  box-shadow:0px 0px 2px 2px grey;
+  border:none !important;
+  outline:none;
+  border-radius:10px;
+  background-color:#F6AF46;
+}
 /* Add rounded corners to the top left and the top right corner of the image */
 img {
   border-radius: 5px 5px 0 0;

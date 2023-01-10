@@ -63,6 +63,7 @@ export default {
 
     submitForm (id, content) {
       this.$store.dispatch('post/post/addComment', { id, content })
+      location.reload();
     },
 
     password (content) {
@@ -70,6 +71,7 @@ export default {
     },
     delatePost (id) {
       this.$store.dispatch('profile/profile/delatePosts', { id })
+      location.reload();
     },
 
     changeDescription (id, content) {
