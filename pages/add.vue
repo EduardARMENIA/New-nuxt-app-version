@@ -82,7 +82,7 @@ import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 
 export default {
-
+   middleware: ['auth'],
   components: {
     VueCropper,
   },

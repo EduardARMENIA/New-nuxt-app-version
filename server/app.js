@@ -3,7 +3,7 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const users = require('./users')()
 
-const m = (name, text, id) => ({ name, text, id })
+const m = (name, text, id, room) => ({ name, text, id, room })
 
 io.on('connection', socket => {
   socket.on('userJoined', (data, cb) => {
@@ -45,9 +45,9 @@ io.on('connection', socket => {
     if (user) {
         console.log(user.room)
         if(users.getByRoom(user.room[0]) === true){
-           io.to(user.room[0]).emit('newMessage', m(user.name, data.text, data.id))
+           io.to(user.room[0]).emit('newMessage', m(user.name, data.text, data.id, data.room))
         }else{
-           io.to(user.room).emit('newMessage', m(user.name, data.text, data.id))
+           io.to(user.room).emit('newMessage', m(user.name, data.text, data.id, data.room))
         }
     }
     cb()

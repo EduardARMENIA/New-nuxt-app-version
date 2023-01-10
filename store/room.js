@@ -38,20 +38,20 @@ export const actions = {
       'Content-Type': 'application/json',
       Authorization: `${cookieValue}`
     }
-    const messages = await this.$axios.$post('/api/messages', { id: data.id, name: data.name, text: data.text}, {
+    const messages = await this.$axios.$post('/api/messages-create', {room: data.room, id: data.id, name: data.name, text: data.text}, {
       headers
     })
   },
-  async getMessage ({ commit }) {
+  async getMessage ({ commit }, data) {
       const cookieValue = this.$cookiz.get('jwt')
-      const response = await this.$axios.$get('/api/messages', {
-        headers: {
-          Authorization: `${cookieValue}`
-        }
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `${cookieValue}`
+      }
+      const response = await this.$axios.$post('/api/messages-show', {room1: data.room1, room2: data.room2},{
+        headers
       })
       const message = await response
-      console.log('es getna')
-      console.log(message)
       for (let i = 0; i < message.length; i++) {
               commit('SOCKET_newMessage', {name:message[i].name, text:message[i].text, id:message[i].id})
       }

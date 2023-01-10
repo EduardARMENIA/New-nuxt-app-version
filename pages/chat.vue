@@ -54,7 +54,7 @@ export default {
     },
   }, 
   mounted () {
-     this.$store.dispatch('room/getMessage')
+    this.$store.dispatch('room/getMessage',  {room1:this.user.room[0], room2:this.user.room[1]})
     this.clear()
   },
 
