@@ -4,18 +4,20 @@
         <div class="left-col">
             <div class="post">
                 <div class="info">
-                 <button class="btn" @click.prevent="openUser(author_id)">
-                            See Profile
-                 </button> 
-
-                 <p class="description" ><span>User </span>{{ author }} </p>
+                 <div class="user">
+                         <img  :src="`${profile_img}`" class="post-image" alt="" id="user" @click.prevent="openUser(author_id)">
+                         <p class="username" @click.prevent="openUser(author_id)"><span> </span>{{ author }} </p>
+                    </div> 
+                 
                    
 
                 </div>
                 <img  :src="`${img}`" class="post-image" alt="">
+               
+               
                 <div class="post-content">
                     <div class="reaction-wrapper">
-                        <img src="https://www.transparentpng.com/thumb/instagram-heart/S7rBAi-instagram-heart-emocition-clipart-photo.png" class="icon" alt=""  @click="addLike(id)">
+                        <img src="https://www.pngfind.com/pngs/m/52-526485_heart-icon-instagram-like-icon-png-transparent-png.png" class="icon" alt=""  @click="addLike(id)">
                         <img src="https://cdn-icons-png.flaticon.com/128/5338/5338282.png" class="icon" alt="">
                     </div>
       
@@ -24,9 +26,15 @@
                                   <p class="description"><span>title </span>{{ title }} </p>
                     <p class="description"><span>desription </span>{{ description }} </p>
                 
-                    <div v-for="(comments, x) in comments" :key="x">
+                    <div v-for="(comments, x) in comments" :key="x" style="display:flex;margin-left:-20px;margin-top:10px;">
                        <p class="description" @click.prevent="openUser(comments.author_id)">
-                            <span>{{ comments.author }} </span> {{ comments.content }}
+                             <div class="user">
+                              <img  :src="`${comments.author_img}`" class="post-image" alt="" id="user" @click.prevent="openUser(author_id)">
+                            </div> 
+                            <div style="display:flex;flex-direction:column;margin-left:10px;">
+                            <span style="color:black;font-weight:bold;">{{ comments.author }} </span>
+                            <span> {{ comments.content }}</span>
+                            </div>
                        </p> 
                     </div>
 
@@ -48,6 +56,7 @@ export default {
       id:  { required: true },
       ['likes']:  { type: Array, required: true },
       author: { type: String, required: true },
+      profile_img: { required: true },
       author_id: { type: Array, required: true },
       title: { type: String, required: true },
       description: { type: String, required: true },
@@ -67,6 +76,8 @@ export default {
       this.$router.push('/User/' + user)
     },
     addLike (id) {
+      console.log(this.profile_img)
+      console.log(this.img)
       this.$store.dispatch('post/post/addLike', {id})
     }
   }  
@@ -124,7 +135,17 @@ export default {
     object-fit: cover;
     background-size:cover;
 }
-
+#user{
+    width:40px;
+    height:40px;
+    margin-left:10px;
+    border-radius:50% 50%;
+    cursor:pointer;
+}
+.username{
+    margin-top:10px;
+    cursor:pointer;
+}
 .post-content{
     width: 100%;
     padding: 20px;

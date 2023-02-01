@@ -10,7 +10,9 @@ io.on('connection', socket => {
     if (!data.name || !data.room) {
       return cb('Данные некорректны')
     }
-
+    console.log('aper takina')
+      console.log(cb)
+      console.log('ee')
 
     socket.join(data.room)
 
@@ -38,7 +40,7 @@ io.on('connection', socket => {
 
   socket.on('createMessage', (data, cb) => {
     if (!data.text) {
-      return cb('Текст не может быть пустым')
+      return ('Текст не может быть пустым')
     }
     console.log('good idea')
     const user = users.get(data.id)
@@ -50,7 +52,7 @@ io.on('connection', socket => {
            io.to(user.room).emit('newMessage', m(user.name, data.text, data.id, data.room))
         }
     }
-    cb()
+  
   })
 
   socket.on('userLeft', (id, cb) => {

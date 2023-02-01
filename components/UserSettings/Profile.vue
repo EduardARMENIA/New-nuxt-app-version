@@ -1,16 +1,15 @@
  <template>
     <div class="card">
-    <h4>User Settings</h4>
+    <h4 style="margin-left:10px;margin-top:10px;">User Settings</h4>
   <img  :src="`${img}`"style="width:100%">
   <div class="container">
     <h4><b>{{ name }}</b></h4>
     <p>{{ email }}</p>
-
-         <input type="file" accept="image/*" @change="onChange" class='hiddenFileInput'/>
+          <button class="getFile" style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Change Avatar</button>
+         <input type="file" id="getFile" accept="image/*" @change="onChange" class='hiddenFileInput' style="display:none" placeholer="Change Picture"/>
         <input id="text" type="password"  v-model="content" placeholder="Change Password" name="content" style="margin-top:20px;"/>
-        <button @click="$emit('password', content)" id = 'send'>Change Password</button>
+        <button @click="$emit('password', content)" id = 'send' style="margin-top:20px;margin-bottom:20px;">Change Password</button>
   </div>
-  <h4 style="margin-left:20px;">Your Posts</h4>
 </div>
 </template>        
 
@@ -51,7 +50,7 @@ export default {
 </script>
 <style scoped>
 .card {
-  margin-top: 150px;
+  margin-top: 50px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   border-radius: 5px; /* 5px rounded corners */
@@ -67,7 +66,18 @@ img {
   border:none !important;
   outline:none;
   border-radius:10px;
-  background-color:#F6AF46;
+  background-color:white;
+}
+.getFile{
+  border:none;
+  width:180px !important;
+  font-size:23px;
+  margin-left:-15px  !important;
+  background-color:white;
+}
+.container{
+  display:flex;
+  flex-direction:column;
 }
 #text{
   outline:none;
@@ -83,5 +93,6 @@ img {
 
 .hiddenFileInput{
   display: inline-block;
+  border:none !important;
 }
 </style>

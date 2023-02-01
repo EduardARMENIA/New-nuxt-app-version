@@ -46,7 +46,6 @@ export default {
     messages() {
       console.log(this.messages)
       console.log('edulik')
-      alert(this.messages[0])
       console.log('end')
       setTimeout(() => {
         this.$refs.block.scrollTop = this.$refs.block.scrollHeight;

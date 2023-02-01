@@ -22,11 +22,12 @@ export const mutations = {
   clearData(state) {
     state.messages = []
   },
-  SOCKET_newMessage(state, message) { 
-    console.log(message)
+  SOCKET__newMessage(state, message) { 
+    console.log('ekav namak@ ed jan')
     state.messages.push(message)
   },
-  SOCKET_updateUsers(state, users) {
+  SOCKET__updateUsers(state, users) {
+    console.log('room exav edik jan')
     state.users = users
   }
 }
@@ -53,7 +54,7 @@ export const actions = {
       })
       const message = await response
       for (let i = 0; i < message.length; i++) {
-              commit('SOCKET_newMessage', {name:message[i].name, text:message[i].text, id:message[i].id})
+              commit('SOCKET__newMessage', {name:message[i].name, text:message[i].text, id:message[i].id})
       }
   },
 

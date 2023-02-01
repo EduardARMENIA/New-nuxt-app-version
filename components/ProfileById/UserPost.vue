@@ -11,11 +11,12 @@
                 <img  :src="`${img}`" class="post-image" alt="">
                 <div class="post-content">
                     <div class="reaction-wrapper">
-                        <img src="https://www.transparentpng.com/thumb/instagram-heart/S7rBAi-instagram-heart-emocition-clipart-photo.png" class="icon" alt=""  @click="addLike(id)">
+                        <img src="https://www.pngfind.com/pngs/m/52-526485_heart-icon-instagram-like-icon-png-transparent-png.png" class="icon" alt=""  @click="addLike(id)">
                         <img src="https://cdn-icons-png.flaticon.com/128/5338/5338282.png" class="icon" alt="">
                     </div>
       
 
+                    <p class="likes">{{ likes[0] }} likes</p>
                                   <p class="description"><span>title </span>{{ title }} </p>
                     <p class="description"><span>desription </span>{{ description }} </p>
                 
@@ -34,7 +35,8 @@
         </div>
     </div>
     </section>
- </template>  
+ </template>
+
 
 <script>
 export default {
@@ -54,8 +56,9 @@ export default {
   },
 
   methods: {
-    addLike (id) {
-      this.$store.dispatch('post/post/addLike', {id})
+    addLike (post) {
+      const id = this.$route.params.id
+      this.$store.dispatch('users/id/_id/addLike', {post, id})
     },
 
     openUser (user) {
@@ -114,8 +117,8 @@ export default {
 
 .post-image{
     width: 100%;
-    height: 700px;
     object-fit: cover;
+    background-size:cover;
 }
 
 .post-content{
@@ -162,6 +165,7 @@ export default {
     border: none;
     outline: none;
     font-size: 14px;
+    padding-left:20px;
 }
 
 .comment-btn,
@@ -194,10 +198,16 @@ export default {
 .reaction-wrapper .icon.save{
     margin-left: auto;
 }
-@media (max-width:700px){
+@media (max-width:1200px){
     .post{
-    width:100%;
-     margin-left:0% !important;
+     width:100% !important;
+     margin-left:0%;
+     
+    }
+    .post-image{
+      background-size:cover;
+      object-fit:cover;
+      height:auto;
     }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h4>All Users</h4>
+  <div id = 'test' style="margin-top: 50px;">
+    <h4 >All Users</h4>
     <div v-for="(todo, key) in users()" :key="key">
-      <div class="card">
+      <div class="card" id = 'card'>
         <img :src="`${todo.img}` "style="width:100%">
         <div class="container">
           <h4><b>{{ todo.name }}</b></h4>
@@ -13,6 +13,7 @@
         </button>
       </div>
     </div>
+
   </div>
 </template>
 

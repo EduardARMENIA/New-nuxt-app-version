@@ -17,7 +17,7 @@ export default {
     send() {
       const name = this.$store.getters['profile/profile/getUsers']
       let x = this.user.room[0, 1]
-      this.$store.dispatch('room/pushMessage', { text: this.text,  name: name[0].name, id: this.user.id, room: x})
+     
       this.$socket.emit(
         "createMessage",
         {
@@ -26,6 +26,7 @@ export default {
           room: x
         },
         data => {
+          console.log(data)
           if (typeof data === "string") {
             console.error(data);
           } else {

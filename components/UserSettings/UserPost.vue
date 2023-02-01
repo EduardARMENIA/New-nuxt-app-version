@@ -3,26 +3,35 @@
     <div class="wrapper">
         <div class="left-col">
             <div class="post">
-                <button class="comment-btn"  @click="$emit('delate', id)" style="color:rgb(255, 0, 0  );">Delate</button>
+                  <button class="comment-btn"  @click="$emit('delate', id)" style="color:rgb(255, 0, 0  );margin-left:10px;">Delete</button>
+                <div style="display:flex;">
                 <input type="text" class="comment-box"  v-model="descriptions"  placeholder="Change description">
                 <button  @click="$emit('changeDescription', id, descriptions)" class="comment-btn">Change</button>
+                </div>
+                <div style="display:flex;">
                 <input type="text" class="comment-box"  v-model="titles"  placeholder="Change Title">
                 <button  @click="$emit('changeTitle', id, titles)" class="comment-btn">Change</button>
+                </div>
                 <div class="info">
-        
-
-                 <p class="description" ><span>User </span>{{ author }} </p>
+                 <div class="user">
+                         <img  :src="`${profile_img}`" class="post-image" alt="" id="user" @click.prevent="openUser(author_id)">
+                         <p class="username" @click.prevent="openUser(author_id)"><span> </span>{{ author }} </p>
+                    </div> 
+                 
                    
 
                 </div>
                 <img  :src="`${img}`" class="post-image" alt="">
+               
+               
                 <div class="post-content">
                     <div class="reaction-wrapper">
-                        <img src="https://www.transparentpng.com/thumb/instagram-heart/S7rBAi-instagram-heart-emocition-clipart-photo.png" class="icon" alt=""  @click="addLike(id)">
+                        <img src="https://www.pngfind.com/pngs/m/52-526485_heart-icon-instagram-like-icon-png-transparent-png.png" class="icon" alt=""  @click="addLike(id)">
                         <img src="https://cdn-icons-png.flaticon.com/128/5338/5338282.png" class="icon" alt="">
                     </div>
       
 
+                    <p class="likes">{{ likes[0] }} likes</p>
                                   <p class="description"><span>title </span>{{ title }} </p>
                     <p class="description"><span>desription </span>{{ description }} </p>
                 
@@ -41,7 +50,7 @@
         </div>
     </div>
     </section>
- </template>  
+ </template>
 <script>
 export default {
   props: {
@@ -49,6 +58,8 @@ export default {
       id:  { required: true },
       author: { type: String, required: true },
       author_id: { type: Array, required: true },
+      profile_img: { required: true },
+      ['likes']:  { type: Array, required: true },
       title: { type: String, required: true },
       description: { type: String, required: true },
       ['comments']: { type: Array, required: true },
@@ -66,9 +77,10 @@ export default {
     openUser (user) {
       this.$router.push('/User/' + user)
     },
-    addLike (id) {
-      this.$store.dispatch('post/post/addLike', {id})
-    }
+     addLike (post) {
+      this.$store.dispatch('profile/profile/addLike', {post})
+    },
+
   }  
  }
 </script>
@@ -124,7 +136,17 @@ export default {
     object-fit: cover;
     background-size:cover;
 }
-
+#user{
+    width:40px;
+    height:40px;
+    margin-left:10px;
+    border-radius:50% 50%;
+    cursor:pointer;
+}
+.username{
+    margin-top:10px;
+    cursor:pointer;
+}
 .post-content{
     width: 100%;
     padding: 20px;

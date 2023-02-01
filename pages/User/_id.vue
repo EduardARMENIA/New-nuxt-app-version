@@ -57,9 +57,9 @@ export default {
       const id = this.$route.params.id
       this.$store.dispatch('users/id/_id/ProfileById', { id })
     },
-    submitForm (id, content) {
-       this.$store.dispatch('post/post/addComment', { id, content })
-       location.reload();
+   submitForm (post, content) {
+      const id = this.$route.params.id
+      this.$store.dispatch('users/id/_id/addComment', { post, id, content })
     }
   }
 }

@@ -66,15 +66,15 @@ export default {
           room: [mixname, mixname2]
         };
         
-
         this.$socket.emit("userJoined", user, data => {
           if (typeof data === "string") {
             console.error(data);
-          } else {
+          }
+            console.log('eee')
+            console.log(data.userId)
             user.id = data.userId;
             this.setUser(user);
             this.$router.push("/chat");
-          }
         });
     }
   }
@@ -87,6 +87,7 @@ export default {
   border-radius: 5px; /* 5px rounded corners */
   width: 40%;
   margin-left:5%;
+  margin-top: 50px;
 }
 .btn{
   box-shadow:0px 0px 2px 2px grey;

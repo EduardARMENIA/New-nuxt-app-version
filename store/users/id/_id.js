@@ -12,6 +12,18 @@ export const mutations = {
   },
    clearPost (state) {
     state.post = null
+  },
+  updateLikesCount (state, id, data) {
+    const index = state.post.findIndex((el) => el._id === id)
+    state.post[index] = {
+       likes: [data],
+    }
+  },
+  updateComments (state, id, data) {
+    const index = state.post.findIndex((el) => el._id === id)
+    state.post[index] = {
+       comments: [data],
+    }
   }
 }
 
@@ -41,11 +53,38 @@ export const actions = {
       await commit('setUsers', todos)
     }
   },
-  async addComment ({ commit, dispatch }, data) {
-    await this.$axios.$post(`/api/${data.id}/comment`, { content: data.content })
-    await commit('clearPost')
-    dispatch("ProfileById");
-    
+
+  async addComment ({dispatch, commit}, data) {
+     console.log(data.post)
+     console.log(data.post)
+     console.log(data.post)
+     console.log(data.post)
+     console.log(data.post)
+     const cookieValue = this.$cookiz.get('jwt')
+     const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `${cookieValue}`
+    }
+    let com = await this.$axios.$post(`/api/${data.post}/comment`, { content: data.content }, {
+      headers
+    })
+    commit('updateComments', data.post, com)
+    dispatch("ProfileById", data);
+
+  },
+
+
+   async addLike ({commit,dispatch}, data) {
+    const cookieValue = this.$cookiz.get('jwt')
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `${cookieValue}`
+    }
+    let tiv2 = await this.$axios.$post(`/api/${data.post}/like`, {}, {
+      headers
+    })
+    commit('updateLikesCount', data.post, tiv2)
+    dispatch("ProfileById", data);
   }
 }
 

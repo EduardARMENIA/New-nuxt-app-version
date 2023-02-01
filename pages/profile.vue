@@ -19,9 +19,10 @@
         :author="post.author"
         :description="post.content"
         :title="post.title"
+        :likes="post.likes"
+        :profile_img="post.profile_img"
         :comments="post.comments"
         :img="post.img"
-        :likes="post.likes"
         @success="submitForm"
         @delate="delatePost"
         @changeDescription="changeDescription"
@@ -61,9 +62,8 @@ export default {
       this.$store.dispatch('profile/profile/Profile')
     },
 
-    submitForm (id, content) {
-      this.$store.dispatch('post/post/addComment', { id, content })
-      location.reload();
+    submitForm (post, content) {
+      this.$store.dispatch('profile/profile/addComment', { post, content})
     },
 
     password (content) {
@@ -71,7 +71,7 @@ export default {
     },
     delatePost (id) {
       this.$store.dispatch('profile/profile/delatePosts', { id })
-      location.reload();
+   
     },
 
     changeDescription (id, content) {

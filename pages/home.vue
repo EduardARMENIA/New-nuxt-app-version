@@ -13,6 +13,7 @@
           :title="todo.title"
           :comments="todo.comments"
           :img="todo.img"
+          :profile_img="todo.profile_img"
           :likes="todo.likes"
           @success="submitForm"
         />
@@ -47,7 +48,6 @@ export default {
 
     submitForm (id, content) {
       this.$store.dispatch('post/post/addComment', { id, content })
-      location.reload();
     }
   }
 }
